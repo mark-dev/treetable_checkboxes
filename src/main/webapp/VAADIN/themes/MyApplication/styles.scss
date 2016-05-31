@@ -1,0 +1,31 @@
+@import "addons.scss";
+@import "myapplication.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in myapplication.scss */
+.MyApplication {
+  @include addons;
+  @include myapplication;
+}
+
+.styled_label {
+  color: #d18100;
+}
+
+ .v-table-cell-content-ms_checked {
+  color: #5bff66;
+  font-style: bold;
+}
+
+ .v-table-cell-content-ms_unchecked {
+  color: #e00865;
+}
+
+ .v-table-cell-content-ms_undefined {
+  color: #e2f1f6;
+}
+
+.v-checkbox > input:indeterminate ~ label:after {
+  color: $v-selection-color;
+  content: "\f068";
+}

@@ -1,0 +1,29 @@
+group 'vaadin_test'
+version '1.0-SNAPSHOT'
+
+apply from: 'http://plugins.jasoft.fi/vaadin.plugin'
+apply plugin: 'java'
+apply plugin: 'war'
+def VaadinVersion = "7.6.5";
+compileJava.options.encoding = 'UTF-8'
+
+vaadin {
+    version VaadinVersion
+}
+
+repositories {
+
+    maven {
+        url 'http://maven.vaadin.com/vaadin-addons'
+    }
+
+    mavenLocal()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    providedCompile "javax:javaee-api:7.0"
+
+    compile "com.vaadin:vaadin-server:${VaadinVersion}"
+    compile "com.vaadin:vaadin-themes:${VaadinVersion}"
+}
