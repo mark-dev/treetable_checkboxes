@@ -12,8 +12,6 @@ import javax.inject.Inject;
  */
 @Theme("MyApplication")
 public class SimpleUI extends UI {
-    private Navigator navigator;
-
 
     @Override
     protected void init(VaadinRequest request) {

@@ -3,6 +3,7 @@ package ru;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.HierarchicalContainer;
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
@@ -27,7 +28,7 @@ public class ViewSample extends VerticalLayout implements View {
         MultiSelectHierarchyContainer container = getContainer();
 
         container.addSelectionChangedEventListener(event -> {
-            Notification.show("New Items: " + event.getSelection().stream().map((i -> i.getItemProperty("amount").getValue())).collect(Collectors.toList()), Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("New Selection: " + event.getSelection().stream().map((i -> i.getItemProperty("amount").getValue())).collect(Collectors.toList()), Notification.Type.TRAY_NOTIFICATION);
         });
 
         TreeTable table = new TreeTable("Table", container);
@@ -36,6 +37,10 @@ public class ViewSample extends VerticalLayout implements View {
         table.setSelectable(false);
         table.setVisibleColumns(MultiSelectHierarchyContainer.CHECKBOX_COLUMN, "amount", "icon");
 
+        //You can toggle selection manually, row click for example
+        table.addItemClickListener((ItemClickEvent.ItemClickListener) event -> {
+            container.toggleSelection(event.getItemId());
+        });
 
         Panel pane = new Panel(table);
         pane.setSizeFull();

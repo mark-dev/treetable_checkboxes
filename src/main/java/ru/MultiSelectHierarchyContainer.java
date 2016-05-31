@@ -56,7 +56,7 @@ public class MultiSelectHierarchyContainer extends HierarchicalContainer {
         return i;
     }
 
-    protected void toggleSelection(Object itemId) {
+    public void toggleSelection(Object itemId) {
         Item item = getItem(itemId);
         SelectionStatus checked = getSelectionValue(item);
         SelectionStatus newValue = checked.opposite();
@@ -85,19 +85,15 @@ public class MultiSelectHierarchyContainer extends HierarchicalContainer {
             else {
 
                 Collection<?> childrenIds = getChildren(parentItemId);
-
+                //Assumed that target item already change his selectionValue
                 Optional<?> firstCheckedChild = childrenIds.stream().filter(childId -> {
-                    if (!childId.equals(itemId)) {
-                        Item childItem = getItem(childId);
-                        SelectionStatus childItemSelectionValue = getSelectionValue(childItem);
-                        return childItemSelectionValue == SelectionStatus.CHECKED || childItemSelectionValue == SelectionStatus.INDETERMINATE;
-                    }
-                    //Do not track target entity itself
-                    return false;
+                    Item childItem = getItem(childId);
+                    SelectionStatus childItemSelectionValue = getSelectionValue(childItem);
+                    return childItemSelectionValue.isChecked();
                 }).findFirst();
 
                 if (firstCheckedChild.isPresent()) {
-                    //  changeSelectionValue(parentItem, INDETERMINATE);
+                    changeSelectionValue(parentItem, SelectionStatus.INDETERMINATE);
                 } else {
                     //Deselect parent due no more child selected
                     changeSelectionValue(parentItem, SelectionStatus.UNCHECKED);
@@ -154,6 +150,10 @@ public class MultiSelectHierarchyContainer extends HierarchicalContainer {
 
     static enum SelectionStatus {
         CHECKED, UNCHECKED, INDETERMINATE;
+
+        public boolean isChecked() {
+            return this == CHECKED || this == INDETERMINATE;
+        }
 
         public SelectionStatus opposite() {
             return (this == CHECKED || this == INDETERMINATE) ? UNCHECKED : CHECKED;
