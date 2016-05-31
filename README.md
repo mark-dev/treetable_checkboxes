@@ -9,7 +9,7 @@ Example of cascade selection (multiselect mode based on checkbox in each row) us
             Object itemId = i;
             Item item = hc.addItem(itemId);
             //Call this function manually for all new items
-            hc.addCheckBoxColumn(itemId, String.valueOf(i), icons[rnd.nextInt(icons.length)]);
+            hc.addCheckBoxColumn(itemId, String.valueOf(i));
        
         //Init your custom properties like item.getItemProperty("amount").setValue(42);
       
