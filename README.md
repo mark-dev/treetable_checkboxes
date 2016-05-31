@@ -24,7 +24,7 @@ Example of cascade selection (multiselect mode based on checkbox in each row) us
         //Dont forget yo add your columns here
         table.setVisibleColumns(MultiSelectHierarchyContainer.CHECKBOX_COLUMN);
 ```
-check complete sample [a here](/src/main/java/ru/ViewSample.java)  
+check complete sample [here](/src/main/java/ru/ViewSample.java)  
 
 ##TODO:  
 
