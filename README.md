@@ -26,6 +26,6 @@ Example of cascade selection (multiselect mode based on checkbox in each row) us
 ```
 check complete sample [a here](/src/main/java/ru/ViewSample.java)  
 
-TODO:  
+##TODO:  
 
 implement inderetminate state (currently showed as "checked")
